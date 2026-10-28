@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.9 万 Star 的 Hypit：让 AI Agent 帮你“一键复刻”爆款视频，保姆级上手教程</title>
+<meta name="description" content="最近 GitHub 上有个项目火得离谱：Hypit 。7 月底才建仓，9 月中旬突然爆发，单日涨了 3000 多 Star，冲上 Trendshift 全语言日榜第一，现在已经接近 2 万 Star。 hypit 的 Star 增长曲线：9 月 15 日前后爆发（数据来源：OSSInsight） 它的口号很直接：“让 ">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5f0;--card:#fff;--text:#1a1a1a;--muted:#5c5c5c;--accent:#1a73e8;--border:#e6e2d8;--code-bg:#f0eee8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+article{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.75rem 2.5rem;box-shadow:0 8px 30px rgba(0,0,0,.04)}
+h1{font-family:"Noto Serif SC",serif;font-size:clamp(1.55rem,4vw,2rem);line-height:1.4;margin:0 0 1.25rem;font-weight:700}
+h2{font-family:"Noto Serif SC",serif;font-size:1.35rem;margin:2.25rem 0 .9rem;padding-top:.5rem;border-top:1px solid var(--border);font-weight:700}
+h2:first-of-type{border-top:none;padding-top:0}h3{font-size:1.1rem;margin:1.5rem 0 .6rem}
+p{margin:.9rem 0}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+ul,ol{padding-left:1.35rem;margin:.8rem 0}li{margin:.35rem 0}strong{font-weight:700}
+img{display:block;max-width:100%;height:auto;margin:1.1rem auto .35rem;border-radius:10px;border:1px solid var(--border);background:#fafafa}
+pre{background:var(--code-bg);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;overflow-x:auto;font-size:.88rem;line-height:1.55}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--code-bg);padding:.1em .35em;border-radius:4px}
+pre code{background:none;padding:0}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--accent);color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.95rem}
+th,td{border:1px solid var(--border);padding:.55rem .7rem;text-align:left;vertical-align:top}th{background:#f3f1eb}
+.meta{color:var(--muted);font-size:.92rem;margin-bottom:1.5rem}
+.pages-banner{margin:0 0 1.25rem;padding:.75rem 1rem;background:#eef5ff;border:1px solid #d0e2ff;border-radius:10px;font-size:.95rem}
+footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--muted);font-size:.88rem}
+</style></head><body><div class="wrap"><article>
+<div class="pages-banner">在线阅读（GitHub Pages）：<a href="https://maynor996.github.io/hypit-viral-video/">https://maynor996.github.io/hypit-viral-video/</a></div>
+<h1>1.9 万 Star 的 Hypit：让 AI Agent 帮你“一键复刻”爆款视频，保姆级上手教程</h1>
+<div class="meta">原文：<a href="https://blog.csdn.net/xianyu120/article/details/167168604">https://blog.csdn.net/xianyu120/article/details/167168604</a></div>
+<p>最近 GitHub 上有个项目火得离谱：<strong>Hypit</strong> 。7 月底才建仓，9 月中旬突然爆发，单日涨了 3000 多 Star，冲上 Trendshift 全语言日榜第一，现在已经接近 2 万 Star。</p>
+<p><img alt="hypit GitHub Star 增长曲线" src="imgs/01.png" /><br />
+<em>hypit 的 Star 增长曲线：9 月 15 日前后爆发（数据来源：OSSInsight）</em></p>
+<p>它的口号很直接：<strong>“让 AI Agent 复刻任何爆款视频。一条命令，100 个变体。”</strong></p>
+<p>热度有多高？已经有人在闲鱼卖“Hypit 资料包”，95 块一份；代部署从 9.9 到 100 元不等。其实官方文档写得很清楚，安装只要一条命令。这篇把它是什么、怎么装、怎么用、花多少钱、有哪些坑一次讲完，省下这笔钱。</p>
+<hr />
+<h3>一、Hypit 到底是什么？</h3>
+<p>一句话：<strong>Hypit 是给 Claude Code、Codex 这类编程 Agent 用的“做视频技能包”。</strong></p>
+<p>注意，它<strong>不是</strong> 一个网页版剪辑工具，也不是剪映那种 App。它由两部分组成：</p>
+<ul>
+<li><strong>Skill（技能）</strong> ：装进你的 Coding Agent，教 Agent 怎么拆解视频、怎么写视频工作流；</li>
+<li><strong><code>hypit</code> 命令行程序</strong>：真正干活的工具，负责生成素材、对齐字幕、渲染成片。</li>
+</ul>
+<p>你给 Agent 一条参考视频，再说清楚想怎么改，Agent 会：</p>
+<ol>
+<li>拆解原片：画面、字幕、B-roll、特效、节奏；</li>
+<li>把这些写成一份<strong>可编辑的工作流文件</strong> （官方叫 SVML），所有画面和字幕都<strong>锚定在“词”上，而不是秒上</strong> ；</li>
+<li>调用图片、视频、配音模型生成新素材；</li>
+<li>用无头浏览器 + ffmpeg 渲染出 mp4。</li>
+</ol>
+<p><img alt="SVML 源文件与视频预览" src="imgs/02.jpeg" /><br />
+<em>左边是 SVML 工作流源文件，右边是对应的视频画面，字幕和图形都锚定在词上（图源：Hypit 官方 README）</em></p>
+<p>最大的不同在于：你拿到的不只是一个成片，而是一份<strong>能反复改、反复跑的工程</strong> 。想换主播、换产品、换语言、换画幅，改几句话重跑就行，这就是“一份工作流，100 个变体”的意思。</p>
+<hr />
+<h3>二、它能做哪些视频？</h3>
+<p>官方 README 里列的场景，基本覆盖了短视频和投流的主流玩法：</p>
+<ul>
+<li><strong>信息流广告</strong> ：从广告库扒一条正在跑的广告，克隆成工作流，换成你的产品，一天出几十个不同开头（Hook）的版本；</li>
+<li><strong>复刻爆款</strong> ：TikTok、Reels、Shorts 上的爆款都能变成模板；</li>
+<li><strong>带货视频</strong> ：跑通一个格式后，每天换一个 SKU、价格、CTA；</li>
+<li><strong>AI UGC 和口播</strong> ：配音、逐词字幕、B-roll、卡点剪辑自动挂好；</li>
+<li><strong>播客、采访切片</strong> ：分屏、区分说话人的字幕、反应特效；</li>
+<li><strong>纯代码渲染的视频</strong> ：字幕、动效全靠前端代码画，<strong>不调用生成模型，可以零 API 费用</strong> ；</li>
+<li><strong>多语言版本</strong> ：同一条视频出十种语言，改一句台词，时间轴自动重排。</li>
+</ul>
+<p>官方给了三个示例，每个都附了真实成本：</p>
+<table>
+<thead>
+<tr>
+<th>示例</th>
+<th>内容</th>
+<th>用到的模型</th>
+<th>总成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>足球排行榜</td>
+<td>20 秒 Tier List，3 个复刻版本</td>
+<td>Seedance 2 Mini + GPT Image 2 + WhisperX</td>
+<td><strong>$1.15</strong></td>
+</tr>
+<tr>
+<td>播客片段</td>
+<td>18 秒肌酸带货播客，换成 3 个广告品类</td>
+<td>同上</td>
+<td><strong>$1.07</strong></td>
+</tr>
+<tr>
+<td>街头采访</td>
+<td>26 秒街采，含西班牙语版本</td>
+<td>同上 + 人脸检测</td>
+<td><strong>$1.09</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：这里的成本<strong>不含 Coding Agent 本身的模型费用</strong> （比如 Claude Code 消耗的 token）。</p>
+</blockquote>
+<hr />
+<h3>三、安装：真的只要一条命令</h3>
+<h4>你需要准备</h4>
+<ul>
+<li>一个支持 Skill 的 Coding Agent，比如 <strong>Claude Code</strong> 或 <strong>Codex</strong> ；</li>
+<li>一条参考视频（本地文件或支持的平台链接），或者一段对目标视频的描述；</li>
+<li>生成模型的账户：用官方托管的 HypiHub，或者用你自己的 API Key。</li>
+</ul>
+<p>如果 Agent 需要帮你把 <code>hypit</code> 程序装在本机，环境要求是 <strong>Node.js 22.15+</strong> ，另外会用到 pnpm、ffmpeg 和 Chromium。不过一般不用你手动装，Agent 会检查并协助安装。</p>
+<h4>安装 Skill</h4>
+<p>在终端执行：</p>
+<pre><code>npx skills add hypit-ai/hypit -g
+</code></pre>
+<p>就这一条。<strong>不需要克隆 Hypit 仓库。</strong> 首次使用时，Agent 会检查有没有 <code>hypit</code> 程序，缺什么会帮你装。</p>
+<p>已经装过的，可以让 Agent 用这条命令检查版本：</p>
+<pre><code>hypit version --check
+</code></pre>
+<hr />
+<h3>四、上手：复刻你的第一条视频</h3>
+<h4>第 1 步：在 Agent 里调用 <code>/hypit</code></h4>
+<p>打开 Claude Code 或 Codex，在任意空目录或项目目录开一个会话，输入：</p>
+<pre><code>/hypit 复刻这个视频：/path/to/video.mp4，把产品换成我的 XXX，保留抓人的开场和排行榜的呈现方式。
+</code></pre>
+<p>也可以附上人物照片、产品图、品牌素材。人物、产品、语言、画幅、行动号召都能改。</p>
+<p>没有参考视频也行，直接描述：</p>
+<pre><code>/hypit 做一个 ranking 视频，把我的产品排到 S 级。
+</code></pre>
+<p><img alt="Claude Code 中运行 hypit" src="imgs/03.jpeg" /><br />
+<em>在 Claude Code 里，Agent 读取参考视频、拆解结构（图源：Hypit 官方快速开始演示视频截图）</em></p>
+<h4>第 2 步：选模型服务</h4>
+<p>Agent 会先检查环境。有对白的视频需要 <strong>WhisperX</strong> 做逐词对齐，本地跑比较吃 GPU，所以有两种选择：</p>
+<ul>
+<li><strong>HypiHub（官方托管）</strong> ：一个账户搞定 WhisperX、图片、视频、配音模型，最省事；</li>
+<li><strong>自带 Key</strong> ：告诉 Agent 你用的是哪家服务、给它接口文档，它会自己写好对接。官方合作的聚合平台有 HiAPI、Pollo API、Monid、TokenDance 等，也可以用你自己的渠道。</li>
+</ul>
+<p><img alt="HypiHub 授权页面" src="imgs/04.jpeg" /><br />
+<em>登录 HypiHub 授权完成后，回到终端继续（图源：Hypit 官方快速开始演示视频截图）</em></p>
+<h4>第 3 步：确认报价，开始制作</h4>
+<p>这一步设计得很贴心：<strong>花钱之前，Agent 会先告诉你用哪个账户、准备生成什么、预计多少钱。</strong> 你确认预算后它才开始连续调用：</p>
+<pre><code>用我的 HypiHub 账户完成这条视频，按我们确认的预算推进，开始吧。
+</code></pre>
+<p><img alt="Agent 给出的费用报价" src="imgs/05.jpeg" /><br />
+<em>Agent 在生成前列出每项调用的单价和总价，这一条约 $1.28（图源：Hypit 官方快速开始演示视频截图）</em></p>
+<p>等生成的时候，Agent 会同时做字幕和图形，进度随时汇报。</p>
+<h4>第 4 步：看成片，继续改</h4>
+<p>成片出来后，Agent 会自己检查版面、字幕、B-roll 的时机。你也可以打开 <strong>Studio</strong> 看时间线、调属性。</p>
+<p><img alt="Hypit Studio 时间线" src="imgs/06.jpeg" /><br />
+<em>Hypit Studio：左侧源码、中间预览、下方时间线（图源：Hypit 官方快速开始演示视频截图）</em></p>
+<p>想改哪里，继续跟它说就行：“把主播换成猫”、“翻译成英文”、“开头换成反问句”。<strong>能复用的素材会继续用，不会重新花钱生成。</strong> 项目都存在普通文件里，随时可以接着改。</p>
+<hr />
+<h3>五、花多少钱？</h3>
+<ul>
+<li><strong>Hypit 本身</strong> ：免费开源，不按人头、不按渲染次数收费，<strong>不加水印</strong> ；</li>
+<li><strong>生成模型</strong> ：按你选的服务商计费，官方示例每条 20 秒左右的视频约 <strong>$1.1</strong> ；</li>
+<li><strong>Coding Agent</strong> ：Claude Code、Codex 的订阅或 token 费另算，复杂视频 Agent 会来回跑很多轮，这块别忽略；</li>
+<li><strong>零成本玩法</strong> ：只做字幕、动效、代码渲染画面，不调生成模型，基本不花 API 费。</li>
+</ul>
+<hr />
+<h3>六、几个坑，提前知道</h3>
+<ol>
+<li><strong>它不是傻瓜工具</strong> ：前提是你会用 Claude Code、Codex 这类命令行 Agent。完全没接触过的话，先花半小时熟悉 Agent 基本操作。</li>
+<li><strong>本地部署有门槛</strong> ：WhisperX 本地跑最好有 GPU，没有就用托管服务。</li>
+<li><strong>中文字幕要多检查</strong> ：有第三方测评反馈，中文场景下字幕偶尔会丢，出片后自己过一遍。</li>
+<li><strong>许可证有限制</strong> ：Hypit 用的是“Apache 2.0 + 附加条款”。<strong>自己用、商用、给客户做视频都可以</strong> ；但<strong>未经书面授权，不能拿它做多租户的 SaaS 或托管服务</strong> ，也不能做商业再分发，CLI 里的 LOGO 和版权信息不能去掉。想“套个壳做网站卖会员”的，这条要注意。</li>
+<li><strong>复刻 ≠ 搬运</strong> ：它复刻的是爆款的<strong>结构</strong> （节奏、开场、字幕、版式），内容要换成你自己的。直接照搬别人的人物、素材和台词，既有版权风险，也容易被平台判定为搬运。</li>
+</ol>
+<hr />
+<h3>七、适合谁用？</h3>
+<ul>
+<li><strong>投流、做广告的</strong> ：一条跑通的素材快速裂变几十个 Hook 版本，这是 Hypit 最值钱的场景；</li>
+<li><strong>电商、带货的</strong> ：一个模板每天换 SKU；</li>
+<li><strong>做 AI 内容账号的</strong> ：批量做排行榜、播客切片、街采类短视频；</li>
+<li><strong>出海做多语言的</strong> ：同一条视频一键多语言版本。</li>
+</ul>
+<p>如果你只是偶尔剪个 vlog，剪映可能更顺手；但如果你需要<strong>批量、可复用、能迭代</strong> 地做视频，Hypit 值得花一个下午试试。</p>
+<hr />
+<h3>相关链接</h3>
+<ul>
+<li>GitHub：hypit-ai/hypit（github.com/hypit-ai/hypit）</li>
+<li>官方快速开始：hypit.ai/zh/quickstart</li>
+<li>模型与 Provider 接入：hypit.ai/zh/guide/providers</li>
+</ul>
+<hr />
+<h3>体验入口</h3>
+<p>玩 Hypit 绕不开大模型。Agent 要靠模型来理解视频、写脚本，跑一条视频往往要来回调用很多轮。</p>
+<ul>
+<li><strong>TryAllAPI（tryallapi.com）</strong> ：OpenAI 兼容的多模型 API 聚合，一个 Key 用 GPT-6.1 等主流模型，baseURL 填 <code>https://tryallapi.com/v1</code> 就能接入支持自定义接口的 Agent 和工具；</li>
+<li><strong>TryGPT（trygpt.asia）</strong> ：网页版 GPT / Gemini / Grok，不用折腾环境，先用它把视频脚本和 Hook 想清楚，再交给 Hypit 批量生产。</li>
+</ul>
+<p>觉得有用的话点个赞、收藏，下一篇写一个实际复刻案例的全过程。</p>
+<footer>镜像自 CSDN @xianyu120 · 内容以原文为准</footer>
+</article></div></body></html>
